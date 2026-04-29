@@ -41,19 +41,19 @@ jobs:
       matrix: ${{ fromJson(needs.setup-build-matrix.outputs.matrix-combinations) }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
 
       - name: Set up Docker Buildx
         if: contains(matrix.arch, 'arm64')
         id: buildx
-        uses: docker/setup-buildx-action@v3
+        uses: docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f # v3
         with:
           driver-opts: |
             image=moby/buildkit:latest
             network=host
 
       - name: Set up Docker Compose
-        uses: docker/setup-compose-action@v1
+        uses: docker/setup-compose-action@2fe291b7677a45ee1269ec56a42604c143505e7e # v1
 
       - name: Log into Docker.io
         if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository
